@@ -8,6 +8,8 @@ This repository is the source of truth for the global (user-level) instructions 
 <client>/<model-slug>.md       generated instruction file, the text pasted into the client
 src/<client>/<model-slug>.md   source for that file, one per client and target model
 shared/<fragment-name>.md      paragraphs reused by several sources
+notes/<client>/<model-slug>.md why that file's rules exist, and what the client rejected
+notes/shared.md                why each shared fragment exists
 scripts/build.py               builds the instruction files from src/ and shared/
 scripts/lint.py                linter for instruction files, docs, and PR titles
 .agents/skills/                skills for agents working in this repository
@@ -29,6 +31,21 @@ In a source, a line holding only `{{fragment-name}}` is replaced by the contents
 - **One file per target model.** Name the file after the model it was tuned for, in lowercase kebab-case (`fable-5-2.md`). When a client applies one instruction field to a whole model family and its models need no separate wording, one file named after the family (`gemini-4.md`) covers them; split it once a model needs its own tuning.
 - **Add, never rename, on a model upgrade.** When a client gains a new model, add a new source tuned for it and leave the existing files in place. Instructions follow the model version, so several files in one directory can be in effect at the same time, each for its own model.
 - **A generated file is the pasted text, verbatim.** No front matter, titles, or notes that should not reach the model.
+
+## Notes
+
+Every instruction file has a notes file at the same path under `notes/`; the linter fails without one. Notes are never deployed. When a rule is added, changed, or removed, record in the notes:
+
+- what was observed or read that led to it, with the date and the source;
+- text a client refused to store, verbatim, so nobody tries it again;
+- a status for each decision:
+  - `confirmed`: the owner asked for it or tested it in the client;
+  - `vendor`: the vendor's documentation for the target model says so;
+  - `carried`: taken from documentation for an earlier model generation, unverified for this one;
+  - `proposed`: the author's default, not yet confirmed by the owner;
+  - `unknown`: the rule predates the notes.
+
+When a model is replaced, read the notes first and drop rules whose reason no longer holds.
 
 ## Deployment
 

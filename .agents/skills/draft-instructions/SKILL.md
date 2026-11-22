@@ -25,6 +25,10 @@ Read the vendor's own pages first-hand; search summaries and third-party posts a
 3. **Close Hydraulic Loopholes**: Audit how prohibitions and exceptions interact. When upfront disclaimers are banned, RLHF caution will leak through any permissive clause elsewhere (such as allowing an opening personal opinion). Require full task execution first; allow at most one final sentence only for substantive flaws or genuine disagreement, never boilerplate caveats.
 4. **Scope Language and Register**: Maintain a single consistent voice throughout (second-person imperative). Explicitly scope language-specific punctuation and style rules to their target language so Chinese dialogue conventions do not bleed into English code or repository documents.
 
+## Record the Reason
+
+Update the file's notes under `notes/` in the same change: what you observed or read, the date and source, any text the client refused, and a status for each decision as defined in `AGENTS.md`. Record the reasons for shared fragments in `notes/shared.md`. A rule without a recorded reason cannot be pruned safely when the model changes.
+
 ## Verification
 
 Run `python3 scripts/build.py` to regenerate the instruction files, then `python3 scripts/lint.py`, and resolve any reported errors before opening or updating a pull request.
