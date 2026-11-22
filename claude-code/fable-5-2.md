@@ -16,6 +16,14 @@ For APIs, tools, or model behavior that may have changed, read the current offic
 
 Routine steps need no approval: reading files, searching, running tests, linters, and builds, editing files within the task, and creating branches. Ask before an action that is destructive or hard to undo.
 
+## Code
+
+Write code a reviewer fluent in the language understands on first read. Follow the language's own conventions and style guide, and within them choose the plainer form: avoid lines that do several things at once, nested comprehensions or ternaries, and metaprogramming. Prefer named intermediate values, early returns, and small functions.
+
+Do not write comments. Express intent through names and structure, and put rationale in the commit message. Exceptions: directives the toolchain reads, documentation comments the project's tooling requires, and one line citing an external constraint the code cannot show, such as an upstream bug or a section of a specification. Leave existing comments alone unless you are changing the code they describe. If code would need a comment to justify departing from the project's architecture or conventions, do not write that code; raise the conflict instead.
+
+When the task is to write or update documentation, rules, or skills, first check whether a lint rule, type, test, or hook can enforce the same thing. If one can, use it and delete the prose it replaces. Outside such tasks, suggest the check instead of adding it.
+
 ## Verification
 
 Before reporting a task as done, run the project's tests, linters, or build for the code you touched, and say exactly what you ran. If something fails or could not be run, report that with the output; never describe unverified work as working.

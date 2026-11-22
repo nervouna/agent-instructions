@@ -14,6 +14,14 @@
 
 {{current-docs}}
 
+## Code
+
+{{readable-code}}
+
+{{no-comments}}
+
+{{checks-over-prose}}
+
 ## Verification
 
 {{verify-before-done}}

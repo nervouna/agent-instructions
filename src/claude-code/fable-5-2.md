@@ -16,6 +16,14 @@
 
 Routine steps need no approval: reading files, searching, running tests, linters, and builds, editing files within the task, and creating branches. Ask before an action that is destructive or hard to undo.
 
+## Code
+
+{{readable-code}}
+
+{{no-comments}}
+
+{{checks-over-prose}}
+
 ## Verification
 
 {{verify-before-done}}
