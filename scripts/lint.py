@@ -10,6 +10,8 @@ import re
 import subprocess
 import sys
 
+import build
+
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 MANAGED_PATH_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 
@@ -17,6 +19,8 @@ ROOT_ALLOWED_FILES = frozenset(
     {".gitattributes", ".gitignore", "AGENTS.md", "CLAUDE.md", "LICENSE", "README.md"}
 )
 # .claude holds only a symlink to .agents/skills, which is linted at its real path.
+FRAGMENT_PATH_RE = re.compile(r"^shared/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+SOURCE_PATH_RE = re.compile(r"^src/[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 UNLINTED_TOP_DIRS = frozenset({".claude", ".github", "scripts"})
 
 EM_DASH_RE = re.compile(r"[\u2014\u2015\u2e3a]")
@@ -105,6 +109,21 @@ def collect_files() -> tuple[list[tuple[pathlib.Path, str]], list[tuple[pathlib.
                 doc_files.append((full_path, rel_posix))
             continue
 
+        if parts[0] == "shared":
+            if FRAGMENT_PATH_RE.match(rel_posix):
+                doc_files.append((full_path, rel_posix))
+            else:
+                errors.append(f"{rel_posix}: path must match shared/<fragment-name>.md in lowercase kebab-case")
+            continue
+        if parts[0] == "src":
+            if SOURCE_PATH_RE.match(rel_posix):
+                doc_files.append((full_path, rel_posix))
+            else:
+                errors.append(
+                    f"{rel_posix}: path must match src/<client>/<model-slug>.md in lowercase kebab-case"
+                )
+            continue
+
         if not MANAGED_PATH_RE.match(rel_posix):
             errors.append(
                 f"{rel_posix}: path must match <client>/<model-slug>.md in lowercase kebab-case"
@@ -168,6 +187,15 @@ def main() -> int:
     for full_path, rel_path in doc_files:
         file_errors, _, _ = lint_markdown_file(full_path, rel_path)
         errors.extend(file_errors)
+
+    outputs, build_errors = build.build_all()
+    errors.extend(build_errors)
+    errors.extend(build.check_outputs(outputs))
+    for _, rel_path in managed_files:
+        if rel_path not in outputs:
+            errors.append(
+                f"{rel_path}: no source at src/{rel_path}; instruction files are generated, edit src/ instead"
+            )
 
     pr_title = (
         args.pr_title if args.pr_title is not None else os.environ.get("PR_TITLE")
