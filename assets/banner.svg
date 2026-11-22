@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="agent-instructions: global rules for AI chat clients and coding agents, kept as code">
+<rect width="1280" height="320" fill="#121417"/>
+<text x="1240" y="256" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="304" font-weight="700" fill="#2a2d33" text-anchor="end">}}</text>
+<rect x="52.0" y="51.7" width="6.0" height="54.0" fill="#e8a33d"/>
+<text x="80.0" y="96.0" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="54" font-weight="700" fill="#ece8df">agent-instructions</text>
+<text x="80.0" y="144.3" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#8f8c84">Global rules for my AI chat clients and coding agents, kept as code.</text>
+<rect x="80.0" y="180.3" width="87.0" height="28.5" rx="14.2" fill="none" stroke="#e8a33d" stroke-width="1.5"/>
+<text x="123.5" y="199.1" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">ChatGPT</text>
+<rect x="177.5" y="180.3" width="78.0" height="28.5" rx="14.2" fill="none" stroke="#e8a33d" stroke-width="1.5"/>
+<text x="216.5" y="199.1" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">Claude</text>
+<rect x="266.0" y="180.3" width="78.0" height="28.5" rx="14.2" fill="none" stroke="#e8a33d" stroke-width="1.5"/>
+<text x="305.0" y="199.1" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">Gemini</text>
+<rect x="80.0" y="220.8" width="123.0" height="28.5" rx="14.2" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="141.5" y="239.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">Claude Code</text>
+<rect x="213.5" y="220.8" width="69.0" height="28.5" rx="14.2" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="248.0" y="239.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">Codex</text>
+<rect x="293.0" y="220.8" width="123.0" height="28.5" rx="14.2" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="354.5" y="239.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">Antigravity</text>
+<rect x="426.5" y="220.8" width="42.0" height="28.5" rx="14.2" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="447.5" y="239.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">Pi</text>
+<rect x="479.0" y="220.8" width="96.0" height="28.5" rx="14.2" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="527.0" y="239.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15.0" fill="#ece8df" text-anchor="middle">OpenCode</text>
+</svg>
