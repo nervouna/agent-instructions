@@ -1,0 +1,26 @@
+name: Lint
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check spelling
+        uses: crate-ci/typos@v1.52.2
+
+      - name: Lint instructions and PR metadata
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title || '' }}
+        run: python3 scripts/lint.py
