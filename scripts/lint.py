@@ -7,10 +7,17 @@ import argparse
 import os
 import pathlib
 import re
+import subprocess
 import sys
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 MANAGED_PATH_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+
+ROOT_ALLOWED_FILES = frozenset(
+    {".gitattributes", ".gitignore", "AGENTS.md", "CLAUDE.md", "LICENSE", "README.md"}
+)
+# .claude holds only a symlink to .agents/skills, which is linted at its real path.
+UNLINTED_TOP_DIRS = frozenset({".claude", ".github", "scripts"})
 
 ALLOWED_DECLARATIONS = (
     "instead of \u201c\u201d",
@@ -73,39 +80,53 @@ def lint_markdown_file(path: pathlib.Path, rel_path: str) -> tuple[list[str], in
     return errors, len(content), len(lines)
 
 
+def list_repo_files() -> list[str]:
+    """Return tracked and untracked-but-not-ignored paths, so local clutter is skipped."""
+    output = subprocess.run(
+        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"],
+        cwd=REPO_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    paths = sorted({p for p in output.split("\0") if p})
+    return [p for p in paths if (REPO_ROOT / p).is_file() or (REPO_ROOT / p).is_symlink()]
+
+
 def collect_files() -> tuple[list[tuple[pathlib.Path, str]], list[tuple[pathlib.Path, str]], list[str]]:
+    """Split repository files into managed instruction files and other linted docs."""
     managed_files: list[tuple[pathlib.Path, str]] = []
-    skill_files: list[tuple[pathlib.Path, str]] = []
+    doc_files: list[tuple[pathlib.Path, str]] = []
     errors: list[str] = []
 
-    for root, dirs, files in os.walk(REPO_ROOT):
-        rel_root = pathlib.Path(root).relative_to(REPO_ROOT)
-        top_part = rel_root.parts[0] if rel_root.parts else ""
+    for rel_posix in list_repo_files():
+        full_path = REPO_ROOT / rel_posix
+        parts = pathlib.PurePosixPath(rel_posix).parts
 
-        if not rel_root.parts:
-            dirs[:] = sorted(d for d in dirs if d != ".git")
-        else:
-            dirs.sort()
-
-        for filename in sorted(files):
-            full_path = pathlib.Path(root) / filename
-            rel_posix = full_path.relative_to(REPO_ROOT).as_posix()
-
-            if top_part in {".github", "scripts"}:
-                continue
-            if top_part == ".agents":
-                if filename.endswith(".md"):
-                    skill_files.append((full_path, rel_posix))
-                continue
-
-            if not MANAGED_PATH_RE.match(rel_posix):
+        if len(parts) == 1:
+            if rel_posix not in ROOT_ALLOWED_FILES:
                 errors.append(
-                    f"{rel_posix}: path must match <client>/<model-slug>.md in lowercase kebab-case"
+                    f"{rel_posix}: unexpected root file (allowed: {', '.join(sorted(ROOT_ALLOWED_FILES))})"
                 )
-                continue
-            managed_files.append((full_path, rel_posix))
+            elif rel_posix.endswith(".md"):
+                doc_files.append((full_path, rel_posix))
+            continue
 
-    return managed_files, skill_files, errors
+        if parts[0] in UNLINTED_TOP_DIRS:
+            continue
+        if parts[0] == ".agents":
+            if rel_posix.endswith(".md"):
+                doc_files.append((full_path, rel_posix))
+            continue
+
+        if not MANAGED_PATH_RE.match(rel_posix):
+            errors.append(
+                f"{rel_posix}: path must match <client>/<model-slug>.md in lowercase kebab-case"
+            )
+            continue
+        managed_files.append((full_path, rel_posix))
+
+    return managed_files, doc_files, errors
 
 
 def lint_pr_title(title: str) -> list[str]:
@@ -150,7 +171,7 @@ def main() -> int:
     parser.add_argument("--pr-title", default=None, help="Validate a PR title string.")
     args = parser.parse_args()
 
-    managed_files, skill_files, errors = collect_files()
+    managed_files, doc_files, errors = collect_files()
     stats: list[tuple[str, int, int]] = []
 
     for full_path, rel_path in managed_files:
@@ -158,7 +179,7 @@ def main() -> int:
         errors.extend(file_errors)
         stats.append((rel_path, char_count, line_count))
 
-    for full_path, rel_path in skill_files:
+    for full_path, rel_path in doc_files:
         file_errors, _, _ = lint_markdown_file(full_path, rel_path)
         errors.extend(file_errors)
 
