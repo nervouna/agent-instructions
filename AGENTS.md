@@ -26,7 +26,7 @@ In a source, a line holding only `{{fragment-name}}` is replaced by the contents
 ## Conventions
 
 - **One directory per client.** Chat clients and coding agents are separate clients with separate directories, even from the same vendor (`claude-chat` and `claude-code`, `chatgpt` and `codex`), because their model lineups and instruction needs differ. Do not derive a coding-agent file from a chat file or the reverse.
-- **One file per target model.** Name the file after the model it was tuned for, in lowercase kebab-case (`fable-5-2.md`).
+- **One file per target model.** Name the file after the model it was tuned for, in lowercase kebab-case (`fable-5-2.md`). When a client applies one instruction field to a whole model family and its models need no separate wording, one file named after the family (`gemini-4.md`) covers them; split it once a model needs its own tuning.
 - **Add, never rename, on a model upgrade.** When a client gains a new model, add a new source tuned for it and leave the existing files in place. Instructions follow the model version, so several files in one directory can be in effect at the same time, each for its own model.
 - **A generated file is the pasted text, verbatim.** No front matter, titles, or notes that should not reach the model.
 
