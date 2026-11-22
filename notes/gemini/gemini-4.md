@@ -8,8 +8,21 @@ Target: Instructions for Gemini in the Gemini app, for Gemini 4 Argon, Carbon, H
 - Get started with Gemini 4 and the Argon, Carbon, and Hydrogen developer guides, `docs.cloud.google.com`.
 - What's new in Gemini 4 Carbon, Neon, and Hydrogen, `ai.google.dev`.
 - "Manage what Gemini remembers about you and customize responses", `support.google.com/gemini/answer/16598625`.
+- "Policy guidelines for the Gemini app", `gemini.google/policy-guidelines/`.
+- "Our approach to the Gemini app", `gemini.google/our-approach/`, published 2024-07-25.
 
 Not read: the Gemini 4 Carbon developer guide under `aistudio.google.com/learn/`, a script-rendered page that needs hosts outside the environment's allowlist.
+
+## What Google publishes about Gemini's behavior
+
+No rule in the source was changed because of these findings. Google has no counterpart to the OpenAI Model Spec or Claude's Constitution; see `notes/chatgpt/astra-6-2.md` and `notes/claude-chat/fable-5-2.md` for those.
+
+- **Two short pages, both about the Gemini app only.** Neither has a version history, authority levels, or a statement about the API or coding products. A search on 2026-11-22 found no newer document; the Axios report on Gemini's "behavior code" describes these same pages as first shared in 2024.
+- **The policy guidelines are a list of outputs to avoid.** The stated goal is "to be maximally helpful to users, while avoiding outputs that could cause real-world harm or offense". The categories are child safety, dangerous activities, violence and gore, harmful factual inaccuracies, harassment, and sexually explicit material. This is the page the app showed when it refused to save the "Do and Stop" section.
+- **Gemini is positioned as a tool without views of its own.** "As a steerable tool, Gemini is designed to follow your instructions and customizations to the best of its ability, within certain specific limits. It should do so without conveying a particular opinion or set of beliefs unless you tell it to." Also: "Gemini is what you make it." Asked for an opinion, "it should respond with a range of views". The decisive-conclusions and independent-stance paragraphs push against this default.
+- **Personality gets one sentence.** "Gemini should be genuine, curious, warm, and vibrant. Not just useful, but fun." Nothing says how this is trained or how it varies by model.
+- **Follow-up questions are intended.** "Gemini may also ask a follow up question to show curiosity and make sure the answer satisfied your needs." This is the habit the "no closing offers" rule targets.
+- **Google states the aim of refusing less.** "Over time our goal is to reduce instances where Gemini does not respond to your prompt". The page dates from 2024 and may not describe Gemini 4.
 
 ## Decisions
 
