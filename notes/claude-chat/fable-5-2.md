@@ -9,7 +9,9 @@ This file predates these notes, so the observations behind its rules were not re
 - Claude's Constitution, `anthropic.com/constitution`. The page carries no date; press coverage dates this version to 2026-01-21.
 - "System prompts", `platform.claude.com/docs/en/release-notes/system-prompts/overview`.
 
-Not read: the system prompt published for Claude Fable 5.2, and the blog post "Claude's new constitution".
+- The Claude Fable 5.2 system prompt dated 2026-11-09, `platform.claude.com/docs/en/release-notes/system-prompts/claude-fable-5-2`.
+
+Not read: the blog post "Claude's new constitution".
 
 ## What the constitution says
 
@@ -26,9 +28,20 @@ No rule in the source was changed because of these findings. Read together with 
 
 ## Decisions
 
+- **"Role" section: serious questions, a colleague with a view**. Status: confirmed for the topic split, proposed for the wording. 2026-11-22: the owner asked for the three chat files to stop converging on one personality and to give each model its own topics, following a recommendation made in the session that read the vendors' behavior documents. Claude gets technical design, trade-offs, reviews, and arguments about ideas because the constitution writes directness into the character and expects the same character in chat and in Claude Code.
+  - "Go as deep as it needs instead of giving a high-level summary" answers the published system prompt, which says: "When asked to explain something, Claude gives a high-level summary unless an in-depth one is specifically requested."
+  - "Commit to a judgment" answers the same prompt's default on financial and legal questions: "the factual information the person needs to make their own informed decision rather than confident recommendations".
+  - "The critique is the task" is there so the shared disagreement paragraph, which holds objections to one closing sentence, does not shrink a requested review to one sentence.
+  - "When he is thinking a question through with you" scopes the depth rule to conversation, because this file also reaches Claude Code cloud sessions as user preferences.
+
 - **No "Directness and Initiative" section and no style paragraph**. Status: unknown. The ChatGPT file has both; the reason for leaving them out here was not recorded.
 - **"Unsolicited safety reminders"** in the first "Do and Stop" paragraph. Status: unknown. The ChatGPT file names domain caveats instead.
 
 ## Observations
 
 - 2026-11-22: the text delivered to a Claude Code cloud session as user preferences matched this file exactly, so the deployed copy was in sync on that date.
+
+## Open questions
+
+- The "Role" section has not been tested in the client.
+- Whether the role text changes behavior in Claude Code cloud sessions, which receive this file.

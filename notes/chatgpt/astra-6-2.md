@@ -11,6 +11,9 @@ This file predates these notes, so the observations behind its rules were not re
 - Model Spec changelog, `github.com/openai/model_spec/blob/main/CHANGELOG.md`.
 - "An updated Model Spec for more capable and beneficial AI", `openai.com/index/updated-model-spec`, published 2026-10-29.
 
+- "Customizing your ChatGPT personality", `help.openai.com/en/articles/11899719`.
+- "ChatGPT custom instructions", `help.openai.com/en/articles/8096356`.
+
 Not read: the release notes linked from the changelog, and whether GPT-6.2 Astra was trained against the 2026-10-29 or an earlier version. The Spec says only "Our production models do not yet fully reflect the Model Spec".
 
 ## What the Model Spec says
@@ -27,6 +30,11 @@ No rule in the source was changed because of these findings. They explain how mu
 
 ## Decisions
 
+- **"Role" section: everyday life, a warm friend who knows him**. Status: confirmed for the topic split, proposed for the wording. 2026-11-22: the owner asked for the three chat files to stop converging on one personality and to give each model its own topics, following a recommendation made in the session that read the vendors' behavior documents. ChatGPT gets everyday life because the Model Spec now leaves personality to the user, its memory makes answers about his own life specific, and the traits removed from the Spec on 2026-10-29 (warm, curious, rationally optimistic) describe this role.
+  - "Stay honest while being warm" is there because asking for warmth pulls toward flattery; the Spec's own wording is "a firm sounding board" and not "a sponge that doles out praise".
+  - "Finish with the concrete step he can take today" names an action of his, so it does not reopen the follow-up offers the Communication section bans.
+  - The decisive-conclusions paragraph stays: the topic split changes warmth and focus, and the owner still wants a clear conclusion from every model.
+
 - **"Directness and Initiative" section**. Status: unknown. Present here and absent from the Claude chat file; the reason for the difference was not recorded.
 - **Domain caveats named explicitly** (legal, medical, financial, "for authorized testing only"). Status: unknown. Inline in this source; the Claude chat file says "unsolicited safety reminders" instead.
 - **"Never pivot to an unrequested high-level overview"**. Status: unknown. Inline in this source only.
@@ -35,4 +43,10 @@ No rule in the source was changed because of these findings. They explain how mu
 ## Open questions
 
 - Whether the "no domain caveats" sentence works in practice, given that the Model Spec ranks the regulated-advice disclaimer at Developer level. Not tested in the client.
-- Length: 3,327 characters. Whether the current custom instructions field accepts that in one piece has not been checked against OpenAI's documentation.
+- The "Role" section has not been tested in the client.
+- Health, legal, and financial questions are everyday-life topics, and they are where the Developer-level disclaimer applies.
+
+## Deployment
+
+- Length: 3,911 characters. The help page says "Free and Go users can save up to 1,500 characters in custom instructions. Plus, Pro, Enterprise, Business, and Education users can save up to 5,000 characters." The file fits only on a paid plan.
+- "Base style and tone" under Personalization selects a preset personality that "works alongside any saved memories or custom instructions". Status: proposed. "Friendly" matches the role; the help page describes it as "Warm and chatty" and best for "Decision support, personal reflection, and planning". The owner's current setting is not recorded.
