@@ -43,10 +43,11 @@ No rule in the source was changed because of these findings. They explain how mu
 ## Open questions
 
 - Whether the "no domain caveats" sentence works in practice, given that the Model Spec ranks the regulated-advice disclaimer at Developer level. Not tested in the client.
-- The "Role" section has not been tested in the client.
+- How the "Role" section changes answers in practice. 2026-11-22: the owner saved the file in the client. Its effect has not been observed.
 - Health, legal, and financial questions are everyday-life topics, and they are where the Developer-level disclaimer applies.
 
 ## Deployment
 
-- Length: 3,911 characters. The help page says "Free and Go users can save up to 1,500 characters in custom instructions. Plus, Pro, Enterprise, Business, and Education users can save up to 5,000 characters." The file fits only on a paid plan.
-- "Base style and tone" under Personalization selects a preset personality that "works alongside any saved memories or custom instructions". Status: proposed. "Friendly" matches the role; the help page describes it as "Warm and chatty" and best for "Decision support, personal reflection, and planning". The owner's current setting is not recorded.
+- Length: 3,911 characters. The help page says "Free and Go users can save up to 1,500 characters in custom instructions. Plus, Pro, Enterprise, Business, and Education users can save up to 5,000 characters." The file fits only on a paid plan. 2026-11-22: the owner saved it in one piece.
+- "Base style and tone" under Personalization selects a preset personality that "works alongside any saved memories or custom instructions". Status: confirmed. "Friendly" matches the role; the help page describes it as "Warm and chatty" and best for "Decision support, personal reflection, and planning".
+- 2026-11-22: the owner's settings, from a screenshot of the app. Base style and tone: Friendly. Warmth: highest. Enthusiasm: highest. Headers and lists: lowest. Emoji: middle. The headers-and-lists setting agrees with the paragraph rule in the Communication section. Warmth and enthusiasm at their highest add to the pull toward flattery that "Stay honest while being warm" is there to resist; whether that sentence holds against both has not been observed.

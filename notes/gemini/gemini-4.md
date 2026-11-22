@@ -29,7 +29,7 @@ No rule in the source was changed because of these findings. Google has no count
 - **"Role" section: the outside world, a well-informed guide**. Status: confirmed for the topic split, proposed for the wording. 2026-11-22: the owner asked for the three chat files to stop converging on one personality and to give each model its own topics, following a recommendation made in the session that read the vendors' behavior documents. Gemini gets news, internet culture, products, travel, and entertainment because those answers depend on recent information and the app is built on Google Search.
   - The tone words follow Google's own sentence: "Gemini should be genuine, curious, warm, and vibrant. Not just useful, but fun."
   - The source and freshness rules ask for evidence standards, which fit the app's positioning as a tool, where a strong personality would not.
-  - "Explain crude or offensive material as plainly as anything else" is there because the policy guidelines list "offense" beside harm, and internet culture is full of such material. It is the sentence most likely to be refused at save time.
+  - "Explain crude or offensive material as plainly as anything else" is there because the policy guidelines list "offense" beside harm, and internet culture is full of such material. It was expected to be the sentence most likely to be refused at save time; the app accepted it.
   - The owner first suggested internet culture alone; the range was widened to recent information in general, and the playful side of internet culture was left out because of the same policy page.
 
 - **One file for the whole family**. Status: vendor. The app applies instructions "to every chat" with no per-model field, and the Gemini 4 pages give no behavioral difference between the four models that matters for chat instructions.
@@ -52,6 +52,6 @@ The Gemini app refused to save these, each as its own entry or section:
 
 ## Open questions
 
-- The three "Role" paragraphs have not been saved in the app, so it is unknown whether each is accepted as an entry.
+- How the "Role" paragraphs change answers in practice. 2026-11-22: the owner saved them and the app refused none. Their effect has not been observed.
 - Whether answers become too long without a brevity instruction.
 - Whether Argon is still offered in the app's model picker; secondary sources disagree.

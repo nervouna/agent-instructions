@@ -43,5 +43,5 @@ No rule in the source was changed because of these findings. Read together with 
 
 ## Open questions
 
-- The "Role" section has not been tested in the client.
+- How the "Role" section changes answers in practice. 2026-11-22: the owner saved the file in the client. Its effect has not been observed.
 - Whether the role text changes behavior in Claude Code cloud sessions, which receive this file.
