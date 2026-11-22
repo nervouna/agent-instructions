@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""Build instruction files from src/ sources and shared/ fragments.
-
-A source file is `src/<client>/<model-slug>.md`. A line that holds only
-`{{fragment-name}}` is replaced by the contents of `shared/fragment-name.md`.
-The result is written to `<client>/<model-slug>.md`, the text that gets pasted
-into the client.
-"""
 
 from __future__ import annotations
 
@@ -21,7 +14,6 @@ INCLUDE_RE = re.compile(r"^\{\{\s*([a-z0-9]+(?:-[a-z0-9]+)*)\s*\}\}$")
 
 
 def load_fragments() -> dict[str, str]:
-    """Map fragment name to its text, without the trailing newline."""
     return {
         path.stem: path.read_text(encoding="utf-8").rstrip("\n")
         for path in sorted(SHARED_DIR.glob("*.md"))
@@ -29,7 +21,6 @@ def load_fragments() -> dict[str, str]:
 
 
 def render(source: str, fragments: dict[str, str], rel_path: str) -> tuple[str, set[str], list[str]]:
-    """Expand include lines in one source file."""
     lines: list[str] = []
     used: set[str] = set()
     errors: list[str] = []
@@ -48,7 +39,6 @@ def render(source: str, fragments: dict[str, str], rel_path: str) -> tuple[str, 
 
 
 def build_all() -> tuple[dict[str, str], list[str]]:
-    """Return the expected text of every output file, keyed by repo-relative path."""
     fragments = load_fragments()
     outputs: dict[str, str] = {}
     errors: list[str] = []
@@ -71,7 +61,6 @@ def build_all() -> tuple[dict[str, str], list[str]]:
 
 
 def check_outputs(outputs: dict[str, str]) -> list[str]:
-    """Report output files that are missing or differ from what the sources produce."""
     errors: list[str] = []
     for rel_output, text in outputs.items():
         path = REPO_ROOT / rel_output
@@ -83,7 +72,7 @@ def check_outputs(outputs: dict[str, str]) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser = argparse.ArgumentParser(description="Build instruction files from src/ sources and shared/ fragments.")
     parser.add_argument("--check", action="store_true", help="Verify outputs instead of writing them.")
     args = parser.parse_args()
 
