@@ -53,7 +53,7 @@ Deployment is manual: copy the whole generated file to the place its client read
 
 - `chatgpt/`: the ChatGPT custom instructions field.
 - `claude-chat/`: the Claude user preferences field.
-- `claude-code/`: the file `~/.claude/CLAUDE.md`, which Claude Code loads in every session before project instructions. Keep it well under 200 lines; longer files reduce adherence.
+- `claude-code/`: the file `~/.claude/CLAUDE.md`, which Claude Code loads in every session before project instructions. Keep it well under 200 lines; longer files reduce adherence. Cloud sessions do not see that file: a cloud environment gets it from a setup script that downloads `claude-code/fable-5-2.md` from this repository's `main` branch into `~/.claude/CLAUDE.md`, so a merge here reaches new cloud containers without a manual step.
 - `opencode/`: the file `~/.config/opencode/AGENTS.md`, applied to every model. Without it OpenCode falls back to `~/.claude/CLAUDE.md`.
 - `pi/`: the file `~/.pi/agent/AGENTS.md`, applied to every model.
 - `gemini/`: Instructions for Gemini in the Gemini app, under Personal Intelligence. Add each paragraph as its own entry; the app checks entries when saving and may refuse one.
