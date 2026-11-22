@@ -10,6 +10,10 @@ description: >-
 
 Follow this semantic checklist when creating or revising an instruction file. Formatting, file naming, spelling, and PR title rules are enforced automatically by `scripts/lint.py` and CI, so do not duplicate them in prose.
 
+## Where to Edit
+
+Instruction files are generated. Edit the source at `src/<client>/<model-slug>.md` or a fragment in `shared/`, never the generated `<client>/<model-slug>.md`. A fragment is included by every source that names it, so change one only when the new wording is right for all of those models; to tune a paragraph for a single model, replace its `{{fragment-name}}` line in that source with the tuned text.
+
 ## Semantic Checklist
 
 1. **Check Version-Specific Guidance First**: Search the vendor's current prompting guide and model spec for the exact target model version before writing. Identify its native defaults so rules do not over-correct them (for example, adding generic brevity commands to an already terse model clips substantive reasoning, while models that pause to ask permission need explicit authority to make reasonable, reversible assumptions). Exclude API-only mechanics such as prompt caching or history-prefix rules when writing for chat clients.
@@ -19,4 +23,4 @@ Follow this semantic checklist when creating or revising an instruction file. Fo
 
 ## Verification
 
-Run `python3 scripts/lint.py` locally and resolve any reported errors before opening or updating a pull request.
+Run `python3 scripts/build.py` to regenerate the instruction files, then `python3 scripts/lint.py`, and resolve any reported errors before opening or updating a pull request.

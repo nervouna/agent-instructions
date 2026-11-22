@@ -5,25 +5,37 @@ This repository is the source of truth for the global (user-level) instructions 
 ## Layout
 
 ```
-<client>/<model-slug>.md   one instruction file per client and target model
-.agents/skills/            skills for agents working in this repository
-.claude/skills             symlink to .agents/skills, so Claude Code loads them too
-scripts/lint.py            linter for instruction files, docs, and PR titles
+<client>/<model-slug>.md       generated instruction file, the text pasted into the client
+src/<client>/<model-slug>.md   source for that file, one per client and target model
+shared/<fragment-name>.md      paragraphs reused by several sources
+scripts/build.py               builds the instruction files from src/ and shared/
+scripts/lint.py                linter for instruction files, docs, and PR titles
+.agents/skills/                skills for agents working in this repository
+.claude/skills                 symlink to .agents/skills, so Claude Code loads them too
 ```
+
+## Sources and Generated Files
+
+Never edit `<client>/<model-slug>.md` by hand. Edit its source under `src/` or a fragment under `shared/`, run `python3 scripts/build.py`, and commit the sources together with the regenerated files. The linter fails when a generated file is stale or has no source.
+
+In a source, a line holding only `{{fragment-name}}` is replaced by the contents of `shared/fragment-name.md`. Everything else is copied as written.
+
+- **Share a paragraph only while it is identical.** Editing a fragment changes every file that includes it. To tune a paragraph for one model, replace the include line in that source with the tuned text and leave the fragment alone.
+- **One paragraph per fragment.** Headings and section order belong to each source.
 
 ## Conventions
 
 - **One directory per client.** Chat clients and coding agents are separate clients with separate directories, even from the same vendor (`claude-chat` and `claude-code`, `chatgpt` and `codex`), because their model lineups and instruction needs differ. Do not derive a coding-agent file from a chat file or the reverse.
 - **One file per target model.** Name the file after the model it was tuned for, in lowercase kebab-case (`fable-5-2.md`).
-- **Add, never rename, on a model upgrade.** When a client gains a new model, add a new file tuned for it and leave the existing files in place. Instructions follow the model version, so several files in one directory can be in effect at the same time, each for its own model.
-- **File content is the pasted text, verbatim.** No front matter, titles, or notes that should not reach the model.
+- **Add, never rename, on a model upgrade.** When a client gains a new model, add a new source tuned for it and leave the existing files in place. Instructions follow the model version, so several files in one directory can be in effect at the same time, each for its own model.
+- **A generated file is the pasted text, verbatim.** No front matter, titles, or notes that should not reach the model.
 
 ## Deployment
 
-Deployment is manual: copy the whole file into the client's global custom-instruction field. Make changes here first and paste them into the client afterwards, so the text in the client never contains edits that are missing from this repository.
+Deployment is manual: copy the whole generated file into the client's global custom-instruction field. Make changes here first and paste them into the client afterwards, so the text in the client never contains edits that are missing from this repository.
 
 ## Changing Instructions
 
-Follow the `draft-instructions` skill in `.agents/skills/` when creating or revising an instruction file, and run `python3 scripts/lint.py` before opening or updating a pull request. Repository documents, commits, and PR titles are written in English.
+Follow the `draft-instructions` skill in `.agents/skills/` when creating or revising an instruction file, then run `python3 scripts/build.py` and `python3 scripts/lint.py` before opening or updating a pull request. Repository documents, commits, and PR titles are written in English.
 
 Pull requests are squash-merged only, to keep the history on `main` linear. After a merge, a reused branch has diverged from `main`: merge `main` into it before adding new commits.
