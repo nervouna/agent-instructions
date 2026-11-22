@@ -1,0 +1,1 @@
+Before reporting a task as done, run the project's tests, linters, or build for the code you touched, and say exactly what you ran. If something fails or could not be run, report that with the output; never describe unverified work as working.
