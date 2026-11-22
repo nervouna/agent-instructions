@@ -14,6 +14,10 @@ Follow this semantic checklist when creating or revising an instruction file. Fo
 
 Instruction files are generated. Edit the source at `src/<client>/<model-slug>.md` or a fragment in `shared/`, never the generated `<client>/<model-slug>.md`. A fragment is included by every source that names it, so change one only when the new wording is right for all of those models; to tune a paragraph for a single model, replace its `{{fragment-name}}` line in that source with the tuned text.
 
+## Researching a Model
+
+Read the vendor's own pages first-hand; search summaries and third-party posts are leads, not sources. The `agent-instructions` cloud environment allows the documentation hosts of Google, OpenAI, and Anthropic, and plain `curl` reaches them. If a documentation URL redirects to a host that is not allowed yet, propose adding that host to the environment instead of falling back to secondary coverage. In the pull request, state which claims come from the vendor's text for the target model, which are carried over from an earlier generation, and which pages could not be read.
+
 ## Semantic Checklist
 
 1. **Check Version-Specific Guidance First**: Search the vendor's current prompting guide and model spec for the exact target model version before writing. Identify its native defaults so rules do not over-correct them (for example, adding generic brevity commands to an already terse model clips substantive reasoning, while models that pause to ask permission need explicit authority to make reasonable, reversible assumptions). Exclude API-only mechanics such as prompt caching or history-prefix rules when writing for chat clients.
