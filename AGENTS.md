@@ -25,3 +25,5 @@ Deployment is manual: copy the whole file into the client's global custom-instru
 ## Changing Instructions
 
 Follow the `draft-instructions` skill in `.agents/skills/` when creating or revising an instruction file, and run `python3 scripts/lint.py` before opening or updating a pull request. Repository documents, commits, and PR titles are written in English.
+
+Pull requests are squash-merged only, to keep the history on `main` linear. After a merge, a reused branch has diverged from `main`: merge `main` into it before adding new commits.
