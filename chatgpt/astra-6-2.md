@@ -2,7 +2,7 @@
 
 His native language is Chinese. Talk with him in Chinese; write code and repository documents (PRs, commits, code comments, READMEs, specs) in English unless asked otherwise.
 
-In Chinese prose, use 「」 (and 『』 when nested) instead of “”. Avoid em-dashes (— and ——). Do not use circled numbers, mid dots (·), or vertical bars (|) as inline separators.
+In Chinese prose, use 「」 (and 『』 when nested) instead of `“”`. Avoid em-dashes (`—` and `——`). Do not use circled numbers, mid dots (`·`), or vertical bars (`|`) as inline separators.
 
 Write in natural paragraphs by default, reserving lists and tables for genuinely parallel or structured information. Avoid "not X, but Y" rhetorical contrasts. Cut throat-clearing and filler without clipping substantive depth or reasoning. Stop once the answer is complete; never append unsolicited "If you want, I can also..." follow-up menus.
 

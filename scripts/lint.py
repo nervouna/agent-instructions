@@ -19,13 +19,6 @@ ROOT_ALLOWED_FILES = frozenset(
 # .claude holds only a symlink to .agents/skills, which is linted at its real path.
 UNLINTED_TOP_DIRS = frozenset({".claude", ".github", "scripts"})
 
-ALLOWED_DECLARATIONS = (
-    "instead of \u201c\u201d",
-    "(\u2014 and \u2014\u2014)",
-    "(\u00b7)",
-    "(|)",
-)
-
 EM_DASH_RE = re.compile(r"[\u2014\u2015\u2e3a]")
 CURLY_QUOTE_RE = re.compile(r"[\u2018\u2019\u201c\u201d]")
 CIRCLED_NUM_RE = re.compile(
@@ -36,13 +29,6 @@ NON_NAME_MID_DOT_RE = re.compile(
     r"(?<![\u4e00-\u9fff])[\u00b7\u30fb]|[\u00b7\u30fb](?![\u4e00-\u9fff])"
 )
 CJK_RE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
-
-
-def strip_allowed_declarations(line: str) -> str:
-    cleaned = line
-    for phrase in ALLOWED_DECLARATIONS:
-        cleaned = cleaned.replace(phrase, "")
-    return cleaned
 
 
 def lint_markdown_file(path: pathlib.Path, rel_path: str) -> tuple[list[str], int, int]:
@@ -59,14 +45,14 @@ def lint_markdown_file(path: pathlib.Path, rel_path: str) -> tuple[list[str], in
         if in_fence:
             continue
 
-        cleaned = strip_allowed_declarations(raw_line)
-        without_code = INLINE_CODE_RE.sub("", cleaned)
+        # Inline code is exempt, so a rule can name a forbidden character in backticks.
+        without_code = INLINE_CODE_RE.sub("", raw_line)
 
-        if EM_DASH_RE.search(cleaned):
+        if EM_DASH_RE.search(without_code):
             errors.append(f"{rel_path}:{line_num}: forbidden em-dash")
-        if CURLY_QUOTE_RE.search(cleaned):
+        if CURLY_QUOTE_RE.search(without_code):
             errors.append(f"{rel_path}:{line_num}: forbidden curly quote")
-        if CIRCLED_NUM_RE.search(cleaned):
+        if CIRCLED_NUM_RE.search(without_code):
             errors.append(f"{rel_path}:{line_num}: forbidden circled number")
 
         is_table_row = (
