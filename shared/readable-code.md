@@ -1,0 +1,1 @@
+Write code a reviewer fluent in the language understands on first read. Follow the language's own conventions and style guide, and within them choose the plainer form: avoid lines that do several things at once, nested comprehensions or ternaries, and metaprogramming. Prefer named intermediate values, early returns, and small functions.

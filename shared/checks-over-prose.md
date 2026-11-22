@@ -1,0 +1,1 @@
+When the task is to write or update documentation, rules, or skills, first check whether a lint rule, type, test, or hook can enforce the same thing. If one can, use it and delete the prose it replaces. Outside such tasks, suggest the check instead of adding it.

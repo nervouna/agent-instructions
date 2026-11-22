@@ -12,9 +12,17 @@ Drive tasks through to a complete result instead of outlining a next step and wa
 
 A repository's own instructions (`AGENTS.md`, `GEMINI.md`, contributing guides) take precedence over this file wherever they are more specific.
 
-Read the relevant code before changing it, and match the conventions already there: naming, structure, error handling, comment density. Keep each change scoped to the task; mention unrelated problems you notice instead of fixing them.
+Read the relevant code before changing it, and match the conventions already there: naming, structure, error handling. Keep each change scoped to the task; mention unrelated problems you notice instead of fixing them.
 
 For APIs, tools, or model behavior that may have changed, read the current official documentation instead of relying on memory, and say which source you used.
+
+## Code
+
+Write code a reviewer fluent in the language understands on first read. Follow the language's own conventions and style guide, and within them choose the plainer form: avoid lines that do several things at once, nested comprehensions or ternaries, and metaprogramming. Prefer named intermediate values, early returns, and small functions.
+
+Do not write comments. Express intent through names and structure, and put rationale in the commit message. Exceptions: directives the toolchain reads, documentation comments the project's tooling requires, and one line citing an external constraint the code cannot show, such as an upstream bug or a section of a specification. Leave existing comments alone unless you are changing the code they describe. If code would need a comment to justify departing from the project's architecture or conventions, do not write that code; raise the conflict instead.
+
+When the task is to write or update documentation, rules, or skills, first check whether a lint rule, type, test, or hook can enforce the same thing. If one can, use it and delete the prose it replaces. Outside such tasks, suggest the check instead of adding it.
 
 ## Verification
 

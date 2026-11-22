@@ -11,7 +11,7 @@ Target: `~/.gemini/GEMINI.md`, the Antigravity global rule file, for the Gemini 
 - **One file for the whole family**. Status: vendor. A global rule file is always active and applies to every model in the selector, including the Claude models and the Orchestrator pairing. Gemini 4 Neon is the default model.
 - **Written for a coding agent, not derived from a chat file**. Status: confirmed. Repository convention.
 - **"A repository's own instructions take precedence"**. Status: proposed. Antigravity combines global and workspace rules cumulatively, so the file states the priority itself.
-- **"Read the relevant code before changing it, and match the conventions already there"**. Status: proposed. Kept here and dropped from the Codex and Claude Code files, whose vendors say to leave routine decisions to the agent.
+- **"Read the relevant code before changing it, and match the conventions already there"**. Status: proposed. 2026-11-22: "comment density" was removed from its list of conventions when the no-comments rule was added. Kept here and dropped from the Codex and Claude Code files, whose vendors say to leave routine decisions to the agent.
 - **Verification and git rules**. Status: proposed. See `notes/shared.md`.
 
 ## Limits
