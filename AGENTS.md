@@ -11,7 +11,7 @@ shared/<fragment-name>.md      paragraphs reused by several sources
 notes/<client>/<model-slug>.md why that file's rules exist, and what the client rejected
 notes/shared.md                why each shared fragment exists
 scripts/build.py               builds the instruction files from src/ and shared/
-scripts/lint.py                linter for instruction files, docs, and PR titles
+scripts/lint.py                linter for instruction files, docs, scripts, and PR titles
 .agents/skills/                skills for agents working in this repository
 .claude/skills                 symlink to .agents/skills, so Claude Code loads them too
 ```
