@@ -32,7 +32,12 @@ In a source, a line holding only `{{fragment-name}}` is replaced by the contents
 
 ## Deployment
 
-Deployment is manual: copy the whole generated file into the client's global custom-instruction field. Make changes here first and paste them into the client afterwards, so the text in the client never contains edits that are missing from this repository.
+Deployment is manual: copy the whole generated file to the place its client reads global instructions from. Make changes here first and deploy afterwards, so a client never holds edits that are missing from this repository.
+
+- `chatgpt/`: the ChatGPT custom instructions field.
+- `claude-chat/`: the Claude user preferences field.
+- `gemini/`: Instructions for Gemini in the Gemini app, under Personal Intelligence. Add each paragraph as its own entry; the app checks entries when saving and may refuse one.
+- `antigravity/`: the file `~/.gemini/GEMINI.md`, which Antigravity loads as an always-on global rule for every model in its selector. A rule file is truncated above 24,000 bytes.
 
 ## Changing Instructions
 
