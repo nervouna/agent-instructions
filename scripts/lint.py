@@ -25,7 +25,7 @@ SOURCE_PATH_RE = re.compile(r"^src/[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9
 NOTES_PATH_RE = re.compile(
     r"^notes/(?:shared|[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*)\.md$"
 )
-UNLINTED_TOP_DIRS = frozenset({".claude", ".github", "scripts"})
+UNLINTED_TOP_DIRS = frozenset({".claude", ".github", "assets", "scripts"})
 
 EM_DASH_RE = re.compile(r"[\u2014\u2015\u2e3a]")
 CURLY_QUOTE_RE = re.compile(r"[\u2018\u2019\u201c\u201d]")

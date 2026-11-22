@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="agent-instructions: global rules for AI chat clients and coding agents, kept as code">
+<rect width="1280" height="640" fill="#121417"/>
+<text x="1218" y="512" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="608" font-weight="700" fill="#1b1e23" text-anchor="end">}}</text>
+<rect x="52.6" y="123.4" width="9.3" height="83.7" fill="#e8a33d"/>
+<text x="68" y="96" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" fill="#8f8c84">github.com/nervouna</text>
+<text x="96.0" y="192.0" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="84" font-weight="700" fill="#ece8df">agent-instructions</text>
+<text x="96.0" y="266.9" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="33" fill="#8f8c84">Global rules for my AI chat clients and coding agents, kept as code.</text>
+<rect x="96.0" y="322.7" width="134.8" height="44.2" rx="22.1" fill="none" stroke="#e8a33d" stroke-width="1.5"/>
+<text x="163.4" y="351.8" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">ChatGPT</text>
+<rect x="247.1" y="322.7" width="120.9" height="44.2" rx="22.1" fill="none" stroke="#e8a33d" stroke-width="1.5"/>
+<text x="307.6" y="351.8" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">Claude</text>
+<rect x="384.3" y="322.7" width="120.9" height="44.2" rx="22.1" fill="none" stroke="#e8a33d" stroke-width="1.5"/>
+<text x="444.7" y="351.8" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">Gemini</text>
+<rect x="96.0" y="385.4" width="190.6" height="44.2" rx="22.1" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="191.3" y="414.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">Claude Code</text>
+<rect x="302.9" y="385.4" width="107.0" height="44.2" rx="22.1" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="356.4" y="414.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">Codex</text>
+<rect x="426.1" y="385.4" width="190.6" height="44.2" rx="22.1" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="521.5" y="414.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">Antigravity</text>
+<rect x="633.1" y="385.4" width="65.1" height="44.2" rx="22.1" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="665.6" y="414.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">Pi</text>
+<rect x="714.4" y="385.4" width="148.8" height="44.2" rx="22.1" fill="none" stroke="#8f8c84" stroke-width="1.5"/>
+<text x="788.8" y="414.6" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="23.25" fill="#ece8df" text-anchor="middle">OpenCode</text>
+<text x="96.0" y="568" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#8f8c84">src/ + shared/  <tspan fill="#e8a33d">→</tspan>  build  <tspan fill="#e8a33d">→</tspan>  lint  <tspan fill="#e8a33d">→</tspan>  one file per client</text>
+</svg>
