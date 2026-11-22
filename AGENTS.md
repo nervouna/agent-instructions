@@ -28,7 +28,7 @@ In a source, a line holding only `{{fragment-name}}` is replaced by the contents
 ## Conventions
 
 - **One directory per client.** Chat clients and coding agents are separate clients with separate directories, even from the same vendor (`claude-chat` and `claude-code`, `chatgpt` and `codex`), because their model lineups and instruction needs differ. Do not derive a coding-agent file from a chat file or the reverse.
-- **One file per target model.** Name the file after the model it was tuned for, in lowercase kebab-case (`fable-5-2.md`). When a client applies one instruction field to a whole model family and its models need no separate wording, one file named after the family (`gemini-4.md`) covers them; split it once a model needs its own tuning.
+- **One file per target model.** Name the file after the model it was tuned for, in lowercase kebab-case (`fable-5-2.md`). When a client applies one instruction field to a whole model family and its models need no separate wording, one file named after the family (`gemini-4.md`) covers them; split it once a model needs its own tuning. When the slot is shared by models from several vendors, as in a third-party harness, name the file `all-models.md`.
 - **Add, never rename, on a model upgrade.** When a client gains a new model, add a new source tuned for it and leave the existing files in place. Instructions follow the model version, so several files in one directory can be in effect at the same time, each for its own model.
 - **A generated file is the pasted text, verbatim.** No front matter, titles, or notes that should not reach the model.
 
@@ -54,6 +54,8 @@ Deployment is manual: copy the whole generated file to the place its client read
 - `chatgpt/`: the ChatGPT custom instructions field.
 - `claude-chat/`: the Claude user preferences field.
 - `claude-code/`: the file `~/.claude/CLAUDE.md`, which Claude Code loads in every session before project instructions. Keep it well under 200 lines; longer files reduce adherence.
+- `opencode/`: the file `~/.config/opencode/AGENTS.md`, applied to every model. Without it OpenCode falls back to `~/.claude/CLAUDE.md`.
+- `pi/`: the file `~/.pi/agent/AGENTS.md`, applied to every model.
 - `gemini/`: Instructions for Gemini in the Gemini app, under Personal Intelligence. Add each paragraph as its own entry; the app checks entries when saving and may refuse one.
 - `codex/`: the file `~/.codex/AGENTS.md`, which Codex reads before project files for every model. Project `AGENTS.md` files come later in the prompt and override it; the combined size is capped at 32 KiB by default.
 - `antigravity/`: the file `~/.gemini/GEMINI.md`, which Antigravity loads as an always-on global rule for every model in its selector. A rule file is truncated above 24,000 bytes.

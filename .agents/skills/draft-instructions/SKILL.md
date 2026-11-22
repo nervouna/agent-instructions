@@ -16,7 +16,7 @@ Instruction files are generated. Edit the source at `src/<client>/<model-slug>.m
 
 ## Researching a Model
 
-Read the vendor's own pages first-hand; search summaries and third-party posts are leads, not sources. The `agent-instructions` cloud environment allows the documentation hosts of Google, OpenAI, and Anthropic, and plain `curl` reaches them. If a documentation URL redirects to a host that is not allowed yet, propose adding that host to the environment instead of falling back to secondary coverage. In the pull request, state which claims come from the vendor's text for the target model, which are carried over from an earlier generation, and which pages could not be read.
+Read the vendor's own pages first-hand; search summaries and third-party posts are leads, not sources. The `agent-instructions` cloud environment allows the documentation hosts of Google, OpenAI, Anthropic, DeepSeek, Z.ai, MiniMax, OpenCode, and Pi, and plain `curl` reaches them. If a documentation URL redirects to a host that is not allowed yet, propose adding that host to the environment instead of falling back to secondary coverage. In the pull request, state which claims come from the vendor's text for the target model, which are carried over from an earlier generation, and which pages could not be read. When a vendor's own material describes capability but not behavior, or is known to overstate it, also collect community reports of how the model behaves in real use, and mark them as second-hand.
 
 ## Semantic Checklist
 
