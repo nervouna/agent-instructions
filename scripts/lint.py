@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import ast
+import io
 import os
 import pathlib
 import re
 import subprocess
 import sys
+import tokenize
 
 import build
 
@@ -29,6 +32,7 @@ CURLY_QUOTE_RE = re.compile(r"[\u2018\u2019\u201c\u201d]")
 CIRCLED_NUM_RE = re.compile(
     r"[\u2460-\u2473\u24ea\u24f5-\u24fe\u2776-\u2793\u3251-\u325f\u32b1-\u32bf]"
 )
+TOOL_DIRECTIVE_RE = re.compile(r"^#\s*(?:noqa|type:|pragma:|fmt:|pylint:|ruff:)")
 INLINE_CODE_RE = re.compile(r"`[^`]*`")
 NON_NAME_MID_DOT_RE = re.compile(
     r"(?<![\u4e00-\u9fff])[\u00b7\u30fb]|[\u00b7\u30fb](?![\u4e00-\u9fff])"
@@ -68,6 +72,31 @@ def lint_markdown_file(path: pathlib.Path, rel_path: str) -> tuple[list[str], in
             errors.append(f"{rel_path}:{line_num}: forbidden inline mid dot")
 
     return errors, len(content), len(lines)
+
+
+def lint_python_file(path: pathlib.Path, rel_path: str) -> list[str]:
+    errors: list[str] = []
+    source = path.read_text(encoding="utf-8")
+
+    for token in tokenize.generate_tokens(io.StringIO(source).readline):
+        if token.type != tokenize.COMMENT:
+            continue
+        line_num = token.start[0]
+        is_shebang = line_num == 1 and token.string.startswith("#!")
+        if is_shebang or TOOL_DIRECTIVE_RE.match(token.string):
+            continue
+        errors.append(f"{rel_path}:{line_num}: forbidden comment")
+
+    documentable = (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)
+    for node in ast.walk(ast.parse(source)):
+        if not isinstance(node, documentable):
+            continue
+        if ast.get_docstring(node) is None:
+            continue
+        line_num = node.body[0].lineno
+        errors.append(f"{rel_path}:{line_num}: forbidden docstring")
+
+    return errors
 
 
 def list_repo_files() -> list[str]:
@@ -193,6 +222,10 @@ def main() -> int:
     for full_path, rel_path in doc_files:
         file_errors, _, _ = lint_markdown_file(full_path, rel_path)
         errors.extend(file_errors)
+
+    for rel_path in list_repo_files():
+        if rel_path.endswith(".py"):
+            errors.extend(lint_python_file(REPO_ROOT / rel_path, rel_path))
 
     outputs, build_errors = build.build_all()
     errors.extend(build_errors)
