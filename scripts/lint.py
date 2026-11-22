@@ -21,6 +21,9 @@ ROOT_ALLOWED_FILES = frozenset(
 # .claude holds only a symlink to .agents/skills, which is linted at its real path.
 FRAGMENT_PATH_RE = re.compile(r"^shared/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 SOURCE_PATH_RE = re.compile(r"^src/[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+NOTES_PATH_RE = re.compile(
+    r"^notes/(?:shared|[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*)\.md$"
+)
 UNLINTED_TOP_DIRS = frozenset({".claude", ".github", "scripts"})
 
 EM_DASH_RE = re.compile(r"[\u2014\u2015\u2e3a]")
@@ -115,6 +118,14 @@ def collect_files() -> tuple[list[tuple[pathlib.Path, str]], list[tuple[pathlib.
             else:
                 errors.append(f"{rel_posix}: path must match shared/<fragment-name>.md in lowercase kebab-case")
             continue
+        if parts[0] == "notes":
+            if NOTES_PATH_RE.match(rel_posix):
+                doc_files.append((full_path, rel_posix))
+            else:
+                errors.append(
+                    f"{rel_posix}: path must be notes/shared.md or notes/<client>/<model-slug>.md"
+                )
+            continue
         if parts[0] == "src":
             if SOURCE_PATH_RE.match(rel_posix):
                 doc_files.append((full_path, rel_posix))
@@ -196,6 +207,10 @@ def main() -> int:
             errors.append(
                 f"{rel_path}: no source at src/{rel_path}; instruction files are generated, edit src/ instead"
             )
+
+    for rel_path in outputs:
+        if not (REPO_ROOT / "notes" / rel_path).is_file():
+            errors.append(f"{rel_path}: missing notes/{rel_path} recording why its rules exist")
 
     pr_title = (
         args.pr_title if args.pr_title is not None else os.environ.get("PR_TITLE")
