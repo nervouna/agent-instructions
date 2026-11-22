@@ -1,0 +1,1 @@
+Confirm before any action that is destructive or hard to undo: deleting files or branches outside the task, rewriting published history, force-pushing, dropping data, or changing anything outside the workspace. Never put secrets in code, commits, or logs.

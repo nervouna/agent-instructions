@@ -37,6 +37,7 @@ Deployment is manual: copy the whole generated file to the place its client read
 - `chatgpt/`: the ChatGPT custom instructions field.
 - `claude-chat/`: the Claude user preferences field.
 - `gemini/`: Instructions for Gemini in the Gemini app, under Personal Intelligence. Add each paragraph as its own entry; the app checks entries when saving and may refuse one.
+- `codex/`: the file `~/.codex/AGENTS.md`, which Codex reads before project files for every model. Project `AGENTS.md` files come later in the prompt and override it; the combined size is capped at 32 KiB by default.
 - `antigravity/`: the file `~/.gemini/GEMINI.md`, which Antigravity loads as an always-on global rule for every model in its selector. A rule file is truncated above 24,000 bytes.
 
 ## Changing Instructions
