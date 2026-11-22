@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Repository linter for managed instruction files and pull request metadata."""
 
 from __future__ import annotations
 
@@ -18,7 +17,6 @@ MANAGED_PATH_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)
 ROOT_ALLOWED_FILES = frozenset(
     {".gitattributes", ".gitignore", "AGENTS.md", "CLAUDE.md", "LICENSE", "README.md"}
 )
-# .claude holds only a symlink to .agents/skills, which is linted at its real path.
 FRAGMENT_PATH_RE = re.compile(r"^shared/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 SOURCE_PATH_RE = re.compile(r"^src/[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 NOTES_PATH_RE = re.compile(
@@ -52,7 +50,6 @@ def lint_markdown_file(path: pathlib.Path, rel_path: str) -> tuple[list[str], in
         if in_fence:
             continue
 
-        # Inline code is exempt, so a rule can name a forbidden character in backticks.
         without_code = INLINE_CODE_RE.sub("", raw_line)
 
         if EM_DASH_RE.search(without_code):
@@ -74,7 +71,6 @@ def lint_markdown_file(path: pathlib.Path, rel_path: str) -> tuple[list[str], in
 
 
 def list_repo_files() -> list[str]:
-    """Return tracked and untracked-but-not-ignored paths, so local clutter is skipped."""
     output = subprocess.run(
         ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"],
         cwd=REPO_ROOT,
@@ -87,7 +83,6 @@ def list_repo_files() -> list[str]:
 
 
 def collect_files() -> tuple[list[tuple[pathlib.Path, str]], list[tuple[pathlib.Path, str]], list[str]]:
-    """Split repository files into managed instruction files and other linted docs."""
     managed_files: list[tuple[pathlib.Path, str]] = []
     doc_files: list[tuple[pathlib.Path, str]] = []
     errors: list[str] = []
@@ -183,7 +178,7 @@ def write_step_summary(stats: list[tuple[str, int, int]]) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description="Lint instruction files, repository docs, and pull request titles.")
     parser.add_argument("--pr-title", default=None, help="Validate a PR title string.")
     args = parser.parse_args()
 
