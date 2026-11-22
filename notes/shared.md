@@ -12,6 +12,7 @@ Why each paragraph in `shared/` exists. Status values are explained in `AGENTS.m
 
 - **`decisive-conclusions`, `competent-adult`**. Status: unknown. Written for ChatGPT before these notes; reused unchanged for the Gemini app.
 - **`drive-to-completion`**. Status: unknown for the original wording. Reused for all three coding agents because the owner prefers agents that finish without waiting for permission; for Claude Code it also answers the early-stopping behavior Anthropic documents for Fable 5.2.
+- **`act-then-stop`**. Status: proposed. OpenCode and Pi only. See `notes/opencode/all-models.md`.
 - **`stay-in-scope`**. Status: proposed. Codex and Claude Code. Unrequested refactors make diffs harder to review.
 - **`current-docs`**. Status: confirmed. 2026-11-22: the owner asked for vendor documentation to be read first-hand for every new model, and set up a cloud environment for it.
 
