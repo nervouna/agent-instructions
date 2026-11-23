@@ -11,6 +11,10 @@ First-hand:
 - Z.ai: GLM-5.3, "Best Practice" for coding agents, and the documentation index, `docs.z.ai`.
 - MiniMax: Models, "Model Invocation", and "Tool Use & Interleaved Thinking", `platform.minimax.io`.
 
+Read on 2026-11-23, first-hand, for the GLM-5.4 release:
+
+- Z.ai: the release post "Toward Generalized Coding with Our First Loop Transformer", `z.ai/blog/glm-5.4`, and "How to Switch Models" and "Thinking Mode", `docs.z.ai`. The post links to `docs.z.ai/guides/llm/glm-5.4`, which returned 404, and the migration guide and pricing page still describe GLM-5.3.
+
 Second-hand, from search summaries of GitHub issues, blog posts, and preprints. `github.com` is not on the environment's allowlist, so the issues themselves were not read.
 
 ## Decisions
@@ -27,7 +31,10 @@ Vendor material describes API mechanics only: none of the three publishes guidan
 
 - **DeepSeek**. Current models: `deepseek-flash`, served by DeepSeek-V4.1-Flash-1017, and `deepseek-v4-pro`.
   - Reported: tool-call loops after the task is done, turns that end after "Let me look into this" with no tool call, unstable parallel tool calls, and repeated violation of agent and global rules in OpenCode.
-- **GLM**. Current models: GLM-5.3 and GLM-5.3-Flash. Reasoning is always on, and the default effort is `max`.
+- **GLM**. Current models: GLM-5.4, on the Coding Plan since 2026-11-23 with the standard API still announced as coming soon, and GLM-5.3-Flash. Reasoning is always on, and the default effort is `max`.
+  - GLM-5.4, vendor: the release post describes architecture, throughput, and demos, and gives no guidance on instruction following or default behavior, so no rule changed. No benchmark of the released model is published; the only figures are an ablation on a 30B model.
+  - GLM-5.4, vendor: "it tends to get caught in overly long \"marathon thinking\" loops". Effort has three levels: `low`, `high`, and `max`. Turning thinking off is converted to `low`, and the vendor recommends `max` for coding.
+  - GLM-5.4, vendor: reasoning from earlier turns is kept by default on every endpoint, and the harness must return `reasoning_content` unmodified. For earlier models that default held only on the Coding Plan endpoint.
   - Reported: mostly routing and hosting failures, such as errors on the Anthropic-compatible route and endless reasoning on third-party hosting. One account of the model quitting right after reading the specification. High cost at the default effort.
 - **MiniMax**. Current models: MiniMax-M3.1-Flash and MiniMax-M3. Thinking cannot be turned off.
   - Reported: turns that stop abruptly or finish with no output, and instruction files being skipped or disregarded in most sessions.
@@ -36,6 +43,7 @@ Vendor material describes API mechanics only: none of the three publishes guidan
 ## Limits of rule text
 
 - Silent stops and endless reasoning were mostly traced to the harness or API layer, such as reasoning content not being kept between tool calls. Rules cannot fix those.
+- GLM-5.4's long thinking is governed by the effort level the harness sends, not by rule text. If it costs too much, lower the effort from `max` to `high` in the harness configuration.
 - OpenCode's maintainers answer reports of ignored rules by pointing to its permissions system.
 
 ## Deployment
@@ -46,4 +54,5 @@ Vendor material describes API mechanics only: none of the three publishes guidan
 ## Open questions
 
 - Whether to keep commit and confirmation limits in an OpenCode permissions configuration instead of prose. The owner has not decided.
+- Whether the GLM reports above, all collected for GLM-5.3, still hold for GLM-5.4. No community reports were collected for it on release day.
 - Not tested in OpenCode.
