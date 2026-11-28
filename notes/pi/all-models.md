@@ -17,7 +17,7 @@ Target: `~/.pi/agent/AGENTS.md`, the Pi coding agent's global context file. Writ
 
 - **One file for every model**. Status: vendor. Context files in the agent directory apply across working directories, and the configuration page describes no way to load instructions per model.
 - **Same content as the OpenCode file, except the image paragraph**. Status: proposed. The rules address the models, and nothing read about Pi calls for different wording. The image paragraph is the first harness-specific rule, so it is written in this source only, not as a shared fragment.
-- **Display images inline**. Status: confirmed for the rule, proposed for the wording. 2026-11-28: the owner asked for a rule to prefer `image(block)` for showing an image inline in the terminal. Checked against the sources above:
+- **Display images inline**. Status: confirmed. 2026-11-28: the owner asked for a rule to prefer `image(block)` for showing an image inline in the terminal, then tested the final wording in Pi with codemode on. Which models were tried is not recorded. Checked against the sources above:
   - `image()` is a global of codemode scripts, not a tool. Codemode is off by default and is turned on with `"defaultTools": ["+codemode"]`. Hence the `read` alternative, so the rule still works in sessions without codemode.
   - The interactive UI draws the image blocks of every tool result inline, not only codemode results (`tool-execution.js`). A `read` of an image file therefore displays it as well. Inside a script, `tools.read()` returns an image block that is shown only once passed to `image()`.
   - `image()` takes a base64 `data:` URL, an `{ image_url }` object, or an image block, in PNG, JPEG, GIF, or WebP; remote URLs are refused. It also saves each image to a temp file and names the path in the result.
@@ -30,9 +30,8 @@ Target: `~/.pi/agent/AGENTS.md`, the Pi coding agent's global context file. Writ
 
 - Pi also reads context files from the working directory and its parents, and combines them with the global one.
 - `AGENTS.override.md` in the agent directory would replace this file.
-- The `image()` part of the image paragraph applies only where codemode is turned on in `~/.pi/agent/settings.json`, a project's `.pi/settings.json`, or with `pi --tools +codemode`.
+- The `image()` part of the image paragraph applies only where codemode is turned on in `~/.pi/agent/settings.json`, a project's `.pi/settings.json`, or with `pi --tools +codemode`. The owner turns it on by default.
 
 ## Open questions
 
-- Not tested in Pi.
-- Whether DeepSeek, GLM, and MiniMax follow the image paragraph, or keep naming paths only.
+- Only the image paragraph has been tested in Pi.
