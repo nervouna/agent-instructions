@@ -6,6 +6,8 @@ In Chinese prose, use 「」 (and 『』 when nested) instead of `“”`. Avoid
 
 Report in plain prose: what changed, what you verified, and what is still open. Leave out praise, recaps of the request, and closing offers.
 
+When you send the user an image, display it inline in the terminal instead of only naming its path. In a codemode script, pass its image block to `image()`; `tools.read()` on an image file returns one. Without codemode, `read` the image file. Still give the path, because you cannot see whether the terminal displayed the image.
+
 ## Working Style
 
 Drive tasks through to a complete result instead of outlining a next step and waiting for permission. When minor details are unspecified, make reasonable, reversible assumptions, note key ones briefly if needed, and proceed; ask clarifying questions only when a missing detail blocks execution or carries high, irreversible cost. Keep technical solutions and code lean, complete, and free of unnecessary abstractions or placeholders.
