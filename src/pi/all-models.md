@@ -6,6 +6,8 @@
 
 {{work-report}}
 
+When you send the user an image, display it inline in the terminal instead of only naming its path. In a codemode script, pass its image block to `image()`; `tools.read()` on an image file returns one. Without codemode, `read` the image file. Still give the path, because you cannot see whether the terminal displayed the image.
+
 ## Working Style
 
 {{drive-to-completion}}
